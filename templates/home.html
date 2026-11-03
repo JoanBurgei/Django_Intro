@@ -2,43 +2,140 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <title>Home</title>
 </head>
+<style>
+    /* ---------- Navbar base ---------- */
+.navbar {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  padding: 0.9rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* ---------- Brand ---------- */
+.navbar-brand {
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: #38bdf8;
+}
+
+/* ---------- Links ---------- */
+.navbar-nav {
+  gap: 0.5rem;
+}
+
+.navbar .nav-link {
+  position: relative;
+  color: #cbd5e1;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+  color: #ffffff;
+}
+
+/* Animated underline */
+.navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 0.2rem;
+  height: 2px;
+  background: #38bdf8;
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.navbar .nav-link:hover::after,
+.navbar .nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* Active link */
+.navbar .nav-link.active {
+  color: #38bdf8;
+}
+
+/* ---------- Mobile toggler ---------- */
+.navbar-toggler {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.35rem 0.6rem;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgba(56, 189, 248, 0.4);
+}
+
+/* Makes the hamburger icon white (it is dark by default) */
+.navbar-toggler-icon {
+  filter: invert(1);
+}
+
+/* ---------- Mobile menu panel ---------- */
+@media (max-width: 992px) {
+  .navbar-collapse {
+    margin-top: 0.8rem;
+    padding: 0.5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .navbar .nav-link::after {
+    left: 0;
+    right: auto;
+    width: 30px;
+  }
+}
+</style>
 <body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">Django App</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'about' %}">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'services' %}">Services</a>
+        </li>
+      </ul>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="{% url 'about'%}">About</a></li>
-          <li><a href="{% url 'services' %}">Page 1-2</a></li>
-          <li><a href="{% url 'home' %}">Page 1-3</a></li>
-        </ul>
-      </li>
-      <li><a href="#">Page 2</a></li>
-      <li><a href="#">Page 3</a></li>
-    </ul>
   </div>
 </nav>
-<div class="container">
-    <h1>{{city}}</h1>
-    <p>Temp is{{temperature}} &deg;C</p>
-    <p>Wind speed is {{ wind }} kph</p>
+
+<h1>{{city}}</h1>
+<p>Temp is{{temperature}} &deg;C</p>
+<p>Wind speed is {{ wind }} kph</p>
 
     {% for name in users %}
       <p>{{name}}</p>
     {% endfor %}
+
 {#pip freeze > requirements.txt#}
-{##}
-</div>
+{#.gitignore#}
 <p>Welcome Home</p>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
