@@ -128,4 +128,9 @@ MAILERS = {
     },
 }
 
+APPEND_SLASH = False
+
+# telling django where to find static folder
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
 # python manage.py runserver hello
